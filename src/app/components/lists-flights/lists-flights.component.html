@@ -1,0 +1,25 @@
+<div class="row">
+    <h2 class="my-2">All flights</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Origin</th>
+                <th scope="col">Destination</th>
+                <th scope="col">Flight Carrier</th>
+                <th scope="col">Flight Number</th>
+                <th scope="col">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let flight of flights;let indice = index">
+                <th scope="row">{{ indice + 1 }}</th>
+                <td>{{ flight.origin }}</td>
+                <td>{{ flight.destination }}</td>
+                <td>{{ flight.transport.flightCarrier }}</td>
+                <td>{{ flight.transport.flightNumber }}</td>
+                <td>{{ flight.price }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

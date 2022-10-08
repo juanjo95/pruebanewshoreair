@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { TokenService } from './services/token.service';
+import { ApiService } from './services/api.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'newshoreair';
+
+  constructor(private token:TokenService){
+  }
+
 }
