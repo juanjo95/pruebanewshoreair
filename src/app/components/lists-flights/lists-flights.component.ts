@@ -22,7 +22,7 @@ export class ListsFlightsComponent implements OnInit {
         let flight = new Flight(transport,res[i].departureStation,res[i].arrivalStation,res[i].price);
         this.flights.push(flight);
       }
-      console.log(this.flights);
+      //console.log(this.flights);
     });
   }
 }

@@ -1,0 +1,62 @@
+<section>
+    <div class="row">
+        <div class="col-sm-12 col-md-5 mx-auto my-5">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="fs-5 text-center">Find your next journey!!!</h4>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="myForm" (submit)="search()">
+                        <datalist id="origindata">
+                        <option *ngFor="let item of flights">{{item.departureStation}}</option>
+                      </datalist>
+                        <div class="form-group mb-3">
+                            <input ngClass="uppercase-input" type="text" name="origin" class="form-control" id="origin" placeholder="Origin" formControlName="origin" maxlength="3" minlength="3" list="origindata" autocomplete="off" required>
+                            <span class="text-danger fw-bolder tamano-alertas" *ngIf="myForm.get('origin')?.hasError('required') && myForm.get('origin')?.touched">origin is required *</span>
+                            <span class="text-danger fw-bolder tamano-alertas" *ngIf="myForm.get('origin')?.hasError('minlength')">Minimum 3 characters*</span>
+                            <span class="text-danger fw-bolder tamano-alertas" *ngIf="myForm.get('origin')?.hasError('maxlength')">Maximum 3 characters*</span>
+                            <span class="text-danger fw-bolder tamano-alertas" *ngIf="myForm.get('origin')?.hasError('pattern')">Only letters*</span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <input ngClass="uppercase-input" type="text" name="destination" class="form-control" id="destination" placeholder="destination" formControlName="destination" maxlength="3" minlength="3" list="origindata" autocomplete="off" required>
+                            <span class="text-danger fw-bolder tamano-alertas" *ngIf="myForm.get('destination')?.hasError('required') && myForm.get('destination')?.touched">destination is required *</span>
+                            <span class="text-danger fw-bolder tamano-alertas" *ngIf="myForm.get('destination')?.hasError('minlength')">Minimum 3 characters*</span>
+                            <span class="text-danger fw-bolder tamano-alertas" *ngIf="myForm.get('destination')?.hasError('maxlength')">Maximum 3 characters*</span>
+                            <span class="text-danger fw-bolder tamano-alertas" *ngIf="myForm.get('destination')?.hasError('pattern')">Only letters*</span>
+                            <span class="text-danger fw-bolder tamano-alertas" *ngIf="myForm.hasError('origindestinationequals')">origin cannot be equal to destination *</span>
+                        </div>
+                        <button type="submit" class="btn btn-dark w-100" [disabled]="myForm.status === 'INVALID'">Search  <i class="bi bi-search"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row" *ngIf="journey">
+        <h2 class="my-2">My journey</h2>
+        <table class="table table-hover">
+            <thead>
+                <tr class="text-center">
+                    <th scope="col">Origin</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Currency</th>
+                    <th scope="col">Flights</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="text-center">
+                    <td>{{ journey.origin }}</td>
+                    <td>{{ journey.destination }}</td>
+                    <td>{{ journey.price | currency}}</td>
+                    <td>
+                        <select class="form-select" aria-label="Default select example" [(ngModel)]="opcionSeleccionada" (change)="changeCurrency($event)">
+                        <option [value]="indice" *ngFor="let currency of currencies; let indice = index">{{ currency }}</option>
+                      </select>
+                    </td>
+                    <td><button class="btn btn-dark" (click)="viewFlights()"><i class="bi bi-ticket-detailed"></i></button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
